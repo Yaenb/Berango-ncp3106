@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reiyaen's Portfolio</title>
+
+  <!-- Bootstrap + font -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --home-offset: 15rem; /* Adjust to push whole home content down */
+      --navbar-top-desktop: 15px;
+      --splat-top: 30px;
+      --splat-left: 325px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "DM Sans", sans-serif;
+      margin: 0;
+      background: url(grid-bg-fportfolio.jpg) no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    /* -------- NAVBAR -------- */
+    .navbar {
+      position: fixed;
+      top: var(--navbar-top-desktop); /* Navbar vertical position */
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1200;
+      background-color: rgba(0,0,0,0.85);
+      border-radius: 20px;
+      max-width: 800px;
+      padding: 0.5rem 1rem;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      transition: all 240ms ease;
+      width: auto;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (min-width: 769px) {
+      .navbar-scrolled {
+        left: 0;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+        margin: 0;
+        padding: 1rem 2rem;
+        height: 90px;
+        background-color: rgba(0,0,0,0.95);
+        top: 0;
+      }
+    }
+
+    .navbar .nav-link {
+      color: #fceec9 !important;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 8px;
+      transition: all 160ms ease;
+    }
+    .navbar .nav-link:hover {
+      color: #febe54 !important;
+      background: rgba(255,255,255,0.06);
+    }
+    .navbar-brand { color: #fceec9; font-weight:700; text-decoration:none; }
+
+    /* Mobile navbar background fix */
+    @media (max-width: 768px) {
+      .navbar {
+        left: 0;
+        transform: none;
+        max-width: 100%;
+        border-radius: 0;
+        margin: 0;
+        top: 0;
+        width: 100%;
+      }
+
+      .navbar-collapse {
+        background: rgba(0,0,0,0.88);
+        border-radius: 0;
+        padding: 1rem;
+        width: 100%;
+      }
+
+      .navbar-toggler {
+        background: rgba(0,0,0,0.88);
+        border-radius: 0;
+        width: 100%;
+        text-align: left;
+        padding-left: 1rem;
+      }
+
+      .navbar-nav { flex-direction: column; align-items: center; }
+      .navbar-nav .nav-link { width: 100%; text-align:center; margin:0.4rem 0; color: #fff; }
+    }
+
+    .navbar-toggler { border-color: rgba(255,255,255,0.12); }
+
+    /* -------- SECTIONS -------- */
+    section { scroll-margin-top: 100px; padding: 4rem 1.5rem; min-height: 100vh; }
+
+    /* -------- HOME / HERO -------- */
+    #home {
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding-top: 0.5rem;
+    }
+
+    .home-content {
+      max-width: 1200px;
+      width: 100%;
+      display:flex;
+      gap: 2rem;
+      align-items: flex-start; /* keep top alignment */
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: var(--home-offset); /* <-- adjust this to move entire content up/down */
+      position: relative;
+      padding: 1rem; /* For easier boundary see */
+    }
+
+    /* Image stack (desktop) */
+    .image-stack {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      flex-shrink: 0;
+      margin-top: 0.8rem; /* Adjust vertical position here */
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .layer {
+      position: absolute;
+      animation-fill-mode: both;
+      /* outline removed */
+    }
+
+    /* Layer positions - tweak these 'top' and 'left' */
+    .layer1 {
+      z-index: 5;
+      width: 400px;
+      top: -110px; /* Layer1 vertical position */
+      left: 200px; /* Layer1 horizontal position */
+    }
+    .layer2 {
+      z-index: 4;
+      width: 380px;
+      top: -130px; /* Layer2 vertical position */
+      left: 50px; /* Layer2 horizontal position */
+    }
+    .layer3 {
+      z-index: 3;
+      width: 300px;
+      top: 310px; /* Layer3 vertical position */
+      left: -40px; /* Layer3 horizontal position */
+    }
+    .layer4 {
+      z-index: 2;
+      width: 460px;
+      top: 10px; /* Layer4 vertical position */
+      left: -35px; /* Layer4 horizontal position */
+    }
+    .layer5 {
+      z-index: 1;
+      width: 470px;
+      top: -150px; /* Layer5 vertical position */
+      left: -130px; /* Layer5 horizontal position */
+    }
+
+    @keyframes slideInLeft { from{transform:translateX(-100px);opacity:0} to{transform:translateX(0);opacity:1} }
+    @keyframes slideInUp   { from{transform:translateY(100px);opacity:0}  to{transform:translateY(0);opacity:1} }
+    .animate-left{animation:slideInLeft 1s ease-out forwards}
+    .animate-up{animation:slideInUp 1s ease-out forwards}
+    .delay-1{animation-delay:.2s}
+    .delay-2{animation-delay:.4s}
+    .delay-3{animation-delay:.6s}
+    .delay-4{animation-delay:.8s}
+    .delay-5{animation-delay:1s}
+
+    /* home text */
+    .home-text {
+      max-width: 600px;
+      margin-left: 60px; /* Horizontal position */
+      margin-top: 0; /* Vertical position */
+      padding: 0.5rem;
+      border-radius: 10px;
+    }
+    .home-text h1 {
+      font-size: 6rem;
+      line-height: 1.05;
+      margin: 0;
+      color: #050505;
+      font-weight: 700;
+      position: relative;
+    }
+    .home-text p {
+      margin-top: 1rem;
+      font-size: 1.3rem;
+      color: #0a0a0a;
+      line-height: 1.6;
+    }
+
+    /* Social icons under home-text p */
+    .social-icons {
+      margin-top: 1rem;
+      display: flex;
+      gap: 1.2rem;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .social-img {
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
+      transition: filter 0.3s ease;
+    }
+
+    .social-img:hover {
+      filter: drop-shadow(0 0 6px #797672);
+    }
+
+    /* splat inside header */
+    .splat-img {
+      position: absolute;
+      width: 150px;
+      pointer-events: none;
+      top: var(--splat-top); /* Splat vertical position */
+      left: var(--splat-left); /* Splat horizontal position */
+      z-index: 999;
+      /* outline removed */
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .home-content {
+        margin-top: 6rem; /* Move entire home content down on mobile */
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .image-stack {
+        width: 150px;
+        height: 340px;
+        margin-top: 1rem;
+        right: 50px; /* Image stack vertical position on mobile */
+      }
+      .layer1 {
+        width: 260px;
+        top: -30px; /* Layer1 vertical position (mobile) */
+        left: 40px; /* Layer1 horizontal position (mobile) */
+      }
+      .layer2 {
+        width: 240px;
+        top: -50px; /* Layer2 vertical position (mobile) */
+        left: 10px; /* Layer2 horizontal position (mobile) */
+      }
+      .layer3 {
+        width: 200px;
+        top: 200px; /* Layer3 vertical position (mobile) */
+        left: -6px; /* Layer3 horizontal position (mobile) */
+      }
+      .layer4 {
+        width: 300px;
+        top: 40px; /* Layer4 vertical position (mobile) */
+        left: -18px; /* Layer4 horizontal position (mobile) */
+      }
+      .layer5 {
+        width: 310px;
+        top: -60px; /* Layer5 vertical position (mobile) */
+        left: -50px; /* Layer5 horizontal position (mobile) */
+      }
+      .home-text {
+        margin-left: 0;
+        margin-top: -2.05rem; /* Vertical position of text on mobile */
+        max-width: 92%;
+      }
+      .home-text h1 { font-size: 3.5rem; }
+      .home-text p { font-size: 1.05rem; }
+
+      .social-icons {
+        justify-content: center;
+      }
+
+      .splat-img {
+        width: 110px;
+        top: calc(var(--splat-top) - -30px); /* Splat vertical position (mobile) */
+        left: calc(var(--splat-left) - 75px); /* Splat horizontal position (mobile) */
+      }
+    }
+
+        .modal-trigger-img-full {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .modal-trigger-img-full:hover {
+      transform: scale(1.05);
+    }
+
+    /* ✅ Modal Styling */
+    .custom-modal {
+      background-color: #fcfafa;
+      color: #493e1f;
+      border-radius: 20px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    }
+
+    .custom-modal .modal-footer {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    /* 🎓 Education Section Header */
+    #education .section-title {
+      font-size: 2.8rem;         /* Adjust size */
+      color: #131111;            /* Custom color */
+      margin-bottom: 0.5rem;
+      text-align: center;        /* Center header */
+      font-weight: 700;
+    }
+
+        #education .edu-image-stack {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      height: 280px; /* fixed height to hold images */
+    }
+
+    #education .edu-image-stack .edu-image {
+      position: relative;
+      width: 280px;
+      height: auto;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    /* Overlap effect - shift images left on the 2nd and 3rd */
+    #education .edu-image-stack .edu-image:nth-child(2) {
+      margin-left: -80px;
+      z-index: 2;
+    }
+
+    #education .edu-image-stack .edu-image:nth-child(3) {
+      margin-left: -80px;
+      z-index: 1;
+    }
+
+    #education .edu-image-stack .edu-image:hover {
+      transform: scale(1.05);
+      z-index: 10;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.7);
+    }
+
+    /* Responsive: stack vertically on small screens */
+    @media (max-width: 767px) {
+      #education .edu-image-stack {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+      #education .edu-image-stack .edu-image {
+        margin-left: 0 !important;
+        width: 90%;
+        max-width: 320px;
+        z-index: auto;
+        transform: none !important;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      }
+    }
+
+        #education .edu-image-stack img:nth-child(2) {
+      flex-grow: 1.5;      /* Makes middle image take more space */
+      max-width: 150%;     /* Slightly bigger than others */
+      height: auto;        /* Keep aspect ratio */
+      z-index: 1;          /* Make sure it stacks nicely */
+    }
+
+    
+
+.seminar-item {
+  display: flex;
+  align-items: center; /* vertically center image and text */
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.seminar-item img {
+  width: 330px; /* bigger image */
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.seminar-item img:hover {
+  transform: scale(1.05);
+}
+
+.seminar-label {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.seminar-label h3 {
+  margin: 0;
+  font-size: 1.6rem; /* bigger heading */
+  font-weight: 600;
+  color: #222;
+}
+
+.seminar-label p {
+  margin: 0.6rem 0 0;
+  font-size: 1.2rem; /* bigger paragraph */
+  color: #555;
+}
+
+/* Section container */
+#seminars {
+  max-width: 1000px;
+  margin: 5rem auto 0; /* push down the whole section */
+  padding: 0 1rem;
+}
+
+/* Section title */
+.section-title {
+  font-size: 2.2rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+
+
+
+
+  /* Container for all project cards */
+  .projects-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2.5rem;
+    flex-wrap: nowrap;
+    padding: 4rem 2rem;
+  }
+
+  /* Individual project card */
+  .project-card {
+    position: relative;
+    width: 280px;
+    cursor: pointer;
+    border-radius: 18px;
+    box-shadow: 12px 12px 0 #111;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .project-card img {
+    width: 100%;
+    border-radius: 18px;
+    display: block;
+  }
+
+  .project-card:hover {
+    transform: scale(1.05);
+  }
+
+  /* Overlay with title and buttons */
+  .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    color: white;
+    background: rgba(71, 69, 69, 0.35); /* Soft shadow */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 18px;
+  }
+
+  .card-overlay h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .card-buttons button {
+    padding: 0.4rem 0.8rem;
+    background: #ece6e6;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .card-buttons button:hover {
+    background: #dbd1b6;
+  }
+
+  /* Modal styles */
+  .modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+  }
+
+  .modal.active {
+    display: flex;
+  }
+
+  .modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Project description */
+  .project-description {
+    margin: 1rem 0;
+    font-size: 0.95rem;
+    color: #333;
+  }
+
+  /* Progress bar section */
+  .skills-progress {
+    margin-top: 1.5rem;
+    text-align: left;
+  }
+
+  .skills-progress label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+    color: #444;
+  }
+
+  .progress {
+    background-color: #eee;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    height: 20px;
+  }
+
+  .progress-bar {
+    background-color: #e43720;
+    height: 100%;
+    color: white;
+    text-align: right;
+    padding-right: 0.5rem;
+    font-size: 0.8rem;
+    line-height: 20px;
+    border-radius: 6px;
+  }
+
+  /* Close button */
+  .close-btn {
+    margin-top: 1.5rem;
+    padding: 0.5rem 1.5rem;
+    background: #050505;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+
+  .close-btn:hover {
+    background: #c4bdbd;
+  }
+
+  .project-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .project-image img {
+    width: 200px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .project-details {
+    flex: 1;
+    min-width: 250px;
+  }
+
+  .project-details h3 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #222;
+  }
+
+  .project-details p {
+    margin: 0.8rem 0 1.2rem;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+  .carousel-wrapper {
+  position: relative;
+  width: 200px;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-images {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-img {
+  min-width: 100%;
+  display: none;
+  border-radius: 12px;
+}
+
+.carousel-img.active {
+  display: block;
+}
+
+.carousel-controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.carousel-controls button {
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-md navbar-dark" role="navigation" aria-label="Main navigation">
+    <div class="container-fluid justify-content-center">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-center" id="navbarContent">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="#home">ABOUT ME</a></li>
+          <li class="nav-item"><a class="nav-link" href="#education">EDUCATION</a></li>
+          <li class="nav-item"><a class="nav-link" href="#seminars">SEMINARS</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">PROJECTS</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact-me">CONTACT ME</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HOME -->
+  <section id="home">
+    <div class="home-content">
+      <div class="image-stack">
+        <img src="star2.png" class="layer layer1 animate-left delay-1" alt="Star" />
+        <img src="mee.png" class="layer layer2 animate-left delay-2" alt="Me" />
+        <img src="star2.png" class="layer layer3 animate-up delay-3" alt="Star" />
+        <img src="cpp.png" class="layer layer4 animate-up delay-4" alt="Code" />
+        <img src="circm.png" class="layer layer5 animate-left delay-5" alt="Circle" />
+      </div>
+
+      <div class="home-text animate-up delay-2">
+        <h1>
+          Reiyaen's<br>
+          portfol<span>i</span>o
+          <img src="splat.png" class="splat-img" alt="Splat" />
+        </h1>
+        <p>This portfolio showcases my skills and abilities .</p>
+
+        <div class="social-icons">
+          <!-- 🔧 Facebook -->
+          <a href="https://www.facebook.com/share/19ZpNyFUX7/" target="_blank">
+            <img src="icons8-facebook-48.png" alt="Facebook" class="social-img" />
+          </a>
+
+          <!-- 🔧 Instagram -->
+          <a href="https://www.instagram.com/yaen.brngo?igsh=MTk3bzMwcjhscWdndw==" target="_blank">
+            <img src="icons8-instagram-logo-64.png" alt="Instagram" class="social-img" />
+          </a>
+
+          <!-- 🔧 TikTok -->
+          <a href="https://www.tiktok.com/@leeknowfroghat?_t=ZS-8y02kb5pa7k&_r=1" target="_blank">
+            <img src="icons8-tiktok-48.png" alt="TikTok" class="social-img" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="text-center my-5">
+    <h2 class="section-title">Glimpse of My Academic Journey !</h2>
+  </div>
+
+      <div class="container my-4">
+    <div class="row justify-content-center g-4">
+
+      <!-- 🏫 Image 1 -->
+      <div class="col-md-4 text-center">
+        <img src="ogs-school.png" alt="Education Preview" class="modal-trigger-img-full" data-bs-toggle="modal" data-bs-target="#educationModal1" />
+      </div>
+
+      <!-- 🏫 Image 2 -->
+      <div class="col-md-4 text-center">
+        <img src="kms-school.png" alt="Education Preview" class="modal-trigger-img-full" data-bs-toggle="modal" data-bs-target="#educationModal2" />
+      </div>
+
+      <!-- 🏫 Image 3 -->
+      <div class="col-md-4 text-center">
+        <img src="ue-school.png" alt="Education Preview" class="modal-trigger-img-full" data-bs-toggle="modal" data-bs-target="#educationModal3" />
+      </div>
+
+    </div>
+  </div>
+
+    <!-- ✅ Modal Structure -->
+    <div class="modal fade" id="educationModal1" tabindex="-1" aria-labelledby="educationModalLabel1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal">
+          <div class="modal-body">
+            <h5 class="modal-title" id="educationModalLabel1">Olive Grove School</h5>
+            <p> From nursery to junior high, my journey at Olive Grove School shaped both my character and curiosity. Growing up in its nurturing environment, I built lasting friendships, explored my passions, and developed a strong foundation in both academics and values. Olive Grove wasn’t just a school—it was where I learned to grow</p>
+            <a href="https://www.facebook.com/OliveGroveSchoolQuezonCity/" class="btn btn-warning btn-sm">Visit School</a>
+          </div>
+          <div class="modal-footer justify-content-end">
+            <button type="button" class="btn btn-outline-dark btn-sm" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="educationModal2" tabindex="-1" aria-labelledby="educationModalLabel2" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal">
+          <div class="modal-body">
+            <h5 class="modal-title" id="educationModalLabel2">Kings' Montessori School</h5>
+            <p> I continued my academic journey at King's Montessori School, where I spent my senior high school years deepening my skills and preparing for the future. The school’s hands-on approach and supportive community helped me grow more confident, independent, and driven. It was a time of discovery, challenge, and refinement—both in the classroom and beyond.
+</p>
+            <a href="https://www.facebook.com/KingsMontessoriSchoolOfficial/" class="btn btn-warning btn-sm">Visit School</a>
+          </div>
+          <div class="modal-footer justify-content-end">
+            <button type="button" class="btn btn-outline-dark btn-sm" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="educationModal3" tabindex="-1" aria-labelledby="educationModalLabel3" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal">
+          <div class="modal-body">
+            <h5 class="modal-title" id="educationModalLabel3">University of the East</h5>
+            <p>Now in my third year at the University of the East, I’m pursuing a degree in Computer Engineering with a focus on smart systems and real-world innovation. My time here has been marked by hands-on projects, late-night debugging sessions, and a growing passion for integrating hardware and software to solve meaningful problems.
+</p>
+            <a href="https://www.ue.edu.ph/mla/" class="btn btn-warning btn-sm">Visit School</a>
+          </div>
+          <div class="modal-footer justify-content-end">
+            <button type="button" class="btn btn-outline-dark btn-sm" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="seminars">
+    <div class="seminar-item">
+    <a href="https://www.facebook.com/share/p/14GbQoStEMz/" target="_blank">
+      <img src="arduinocra (1).png" alt="Seminar 1">
+    </a>
+    <div class="seminar-label">
+      <h3>𝗘𝗫𝗣𝗟𝗢𝗥𝗘 𝗧𝗛𝗘 𝗣𝗢𝗪𝗘𝗥 𝗢𝗙 𝗔𝗥𝗗𝗨𝗜𝗡𝗢! </h3>
+      <p>Hats off to all participants who showcased their skills at the Circuit Crash Competition: The Power of Arduino on February 27, 2024! 
+</p>
+    </div>
+  </div>
+
+  <div class="seminar-item">
+    <a href="https://www.facebook.com/share/p/16T9Bp7tbM/" target="_blank">
+      <img src="figma (2).png" alt="Seminar 2">
+    </a>
+    <div class="seminar-label">
+      <h3>Happening Now:</h3>
+      <p>Figma 101 Workshop with our amazing 2nd Year BSCpE students!.</p>
+    </div>
+  </div>
+
+  <div class="seminar-item">
+    <a href="https://www.facebook.com/share/p/16T9Bp7tbM/" target="_blank">
+      <img src="git.png" alt="Seminar 3">
+    </a>
+    <div class="seminar-label">
+      <h3>Seminar for 2nd Year Students: Git & Copilot</h3>
+    </div>
+  </div>
+
+  </div>
+  </section>
+
+<section id="projects" style="max-width: 900px; margin: 3rem auto; padding: 0 1rem;">
+  <div class="projects-container">
+    <!-- Card 1 -->
+    <div class="project-card" data-modal-target="#modal1">
+      <img src="Profile.jpg" alt="Project 1" />
+      <div class="card-overlay">
+        <h4>Personal Profile App</h4>
+        <div class="card-buttons">
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="project-card" data-modal-target="#modal2">
+      <img src="In-between.jpg" alt="Project 2" />
+      <div class="card-overlay">
+         <h4>HI-LO CARD GAME</h4>
+        <div class="card-buttons">
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="project-card" data-modal-target="#modal3">
+      <img src="multi game.jpg" alt="Project 3" />
+      <div class="card-overlay">
+        <h4>IN-BETWEEN CARD GAME & MINIGAMES</h4>
+        <div class="card-buttons">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 1 -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <div class="modal-body project-layout">
+        <div class="project-image carousel-wrapper">
+          <div class="carousel-images">
+            <img src="Profile.jpg" class="carousel-img active" alt="Slide 1">
+            <img src="prof2.jpg" class="carousel-img" alt="Slide 2">
+            <img src="prof3.jpg" class="carousel-img" alt="Slide 3">
+            <img src="prof4.jpg" class="carousel-img" alt="Slide 4">
+          </div>
+          <div class="carousel-controls">
+            <button class="prev-btn">‹</button>
+            <button class="next-btn">›</button>
+          </div>
+        </div>
+        <div class="project-details">
+          <h3>Personal Profile App</h3>
+          <p>I created a personal profile app in Android Studio styled like a phone lockscreen. The interface features custom notifications that act as interactive links to my social media and Notion page, where I showcase my personal details, interests, and hobbies.</p>
+          <div class="skills-progress">
+            <label>Skill Progress:</label>
+            <label>Kotlin</label>
+            <div class="progress"><div class="progress-bar" style="width: 80%;">80%</div></div>
+            <label>JavaScript</label>
+            <div class="progress"><div class="progress-bar" style="width: 60%;">60%</div></div>
+          </div>
+          <button class="close-btn">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2 -->
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <div class="modal-body project-layout">
+        <div class="project-image carousel-wrapper">
+          <div class="carousel-images">
+            <img src="In-between.jpg" class="carousel-img" alt="Smart Home 1">
+            <img src="hilo2.jpg" class="carousel-img active" alt="Smart Home 2">
+            <img src="hilo3.jpg" class="carousel-img" alt="Smart Home 3">
+            <img src="hilo4.jpg" class="carousel-img" alt="Smart Home 4">
+          </div>
+          <div class="carousel-controls">
+            <button class="prev-btn">‹</button>
+            <button class="next-btn">›</button>
+          </div>
+        </div>
+        <div class="project-details">
+          <h3>Higher or Lower Game</h3>
+          <p>We built a Higher or Lower card game with an Alice in Wonderland theme. Each round shows one revealed card and one hidden card — players guess if the next card is higher or lower using two buttons. The game runs for 5 rounds, blending whimsical visuals with simple logic for a fun, themed challenge.</p>
+          <div class="skills-progress">
+            <label>Skill Progress:</label>
+            <label>Kotlin</label>
+            <div class="progress"><div class="progress-bar" style="width: 70%;">70%</div></div>
+            <label>JavaScript</label>
+            <div class="progress"><div class="progress-bar" style="width: 60%;">60%</div></div>
+          </div>
+          <button class="close-btn">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3 -->
+  <div id="modal3" class="modal">
+    <div class="modal-content">
+      <div class="modal-body project-layout">
+        <div class="project-image carousel-wrapper">
+          <div class="carousel-images">
+            <img src="multi game.jpg" class="carousel-img active" alt="Portfolio 1">
+            <img src="multig4.jpg" class="carousel-img" alt="Portfolio 2">
+            <img src="multig5.jpg" class="carousel-img" alt="Portfolio 3">
+            <img src="multig6.jpg" class="carousel-img" alt="Portfolio 4">
+            <img src="multig3.jpg" class="carousel-img" alt="Portfolio 5">
+            <img src="multi17.jpg" class="carousel-img" alt="Portfolio 6">
+            <img src="multig7.jpg" class="carousel-img" alt="Portfolio 7">
+            <img src="multi37.jpg" class="carousel-img" alt="Portfolio 8">
+            <img src="multig8.jpg" class="carousel-img" alt="Portfolio 9">
+          </div>
+          <div class="carousel-controls">
+            <button class="prev-btn">‹</button>
+            <button class="next-btn">›</button>
+          </div>
+        </div>
+        <div class="project-details">
+          <h3>In-Between Games and Minigames</h3>
+          <p>In-Between, tests your luck and instincts as you guess whether the next card falls between two others. Into the mini-games: High or Lower, where you predict card values, and Rock Paper Scissors, a classic showdown.</p>
+          <div class="skills-progress">
+            <label>Skill Progress:</label>
+            <label>Kotlin</label>
+            <div class="progress"><div class="progress-bar" style="width: 90%;">90%</div></div>
+            <label>JavaScript</label>
+            <div class="progress"><div class="progress-bar" style="width: 80%;">80%</div></div>
+          </div>
+          <button class="close-btn">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact-me">
+      <style>
+    #contact-me {
+      display: flex;
+      flex-direction: column;      /* stack contact + footer */
+      justify-content: flex-start; /* content starts from top */
+      align-items: center;
+      padding: 80px 0 40px;        /* top/bottom spacing */
+      background: url("background.png") no-repeat center center;
+      background-size: cover;
+      min-height: 100vh;           /* fills full screen */
+      box-sizing: border-box;
+    }
+
+    #contact-me .contact-container {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      max-width: 750px;
+      width: 100%;
+      margin-top: 40px;            /* push down slightly */
+    }
+
+    #contact-me .contact-container img {
+      width: 220px;
+      margin-right: 25px;
+    }
+
+    #contact-me .form-box {
+      flex: 1;
+      max-width: 400px;
+    }
+
+    #contact-me .form-box h2 {
+      margin-bottom: 20px;
+    }
+
+    #contact-me input,
+    #contact-me textarea {
+      width: 100%;
+      margin: 10px 0;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #000;
+      font-size: 15px;
+    }
+
+    #contact-me textarea {
+      height: 110px;
+      resize: none;
+    }
+
+    #contact-me button {
+      background: black;
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    #contact-me button:hover {
+      background: #444;
+    }
+
+     /* Footer inside contact section */
+    #contact-me .section-footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #777;
+      margin-top: 10px;
+    }
+
+    /* Popup */
+    #popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    #popup .popup-content {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 18px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    #popup button {
+      margin-top: 15px;
+      background: black;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+
+  <div class="contact-container">
+    <img src="cat.png" alt="Cool Cat">
+    <div class="form-box">
+      <h2>Contact me</h2>
+      <form action="send-mail.php" method="POST">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Email address" required>
+        <input type="text" name="subject" placeholder="Subject" required>
+        <textarea name="message" placeholder="Your message" required></textarea>
+        <button type="submit">Send message</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="section-footer">
+    <p>&copy; 2025 Reiyaen</p>
+  </div>
+
+  <!-- Popup -->
+  <div id="popup">
+    <div class="popup-content">
+      <p>Your email was sent! I'll get back to you as soon as I can.</p>
+      <button onclick="closePopup()">OK</button>
+    </div>
+  </div>
+
+  <script>
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+    // Show popup on success
+    window.addEventListener("load", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("success") === "1") {
+        document.getElementById("popup").style.display = "flex";
+      }
+    });
+  </script>
+</section>
+
+  
+  <script>
+    function isHomeMostlyVisible() {
+      const home = document.getElementById('home');
+      if (!home) return false;
+      const r = home.getBoundingClientRect();
+      const mid = (r.top + r.bottom) / 2;
+      return mid > 0 && mid < window.innerHeight;
+    }
+
+    function onScroll() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 40 || !isHomeMostlyVisible()) {
+        navbar.classList.add('navbar-scrolled');
+      } else {
+        navbar.classList.remove('navbar-scrolled');
+      }
+    }
+
+    window.addEventListener('scroll', onScroll);
+    window.addEventListener('load', onScroll);
+  </script>
+
+  <script>
+  // open modal
+  document.querySelectorAll('[data-modal-target]').forEach(card => {
+    card.addEventListener('click', () => {
+      const modalId = card.getAttribute('data-modal-target');
+      const modal = document.querySelector(modalId);
+      if (modal) modal.classList.add('active');
+    });
+  });
+
+  // close modal
+  document.querySelectorAll('.close-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.modal').classList.remove('active');
+    });
+  });
+
+  // closes modal when clicking outside tab
+  document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click', e => {
+      if (e.target === modal) modal.classList.remove('active');
+    });
+  });
+</script>
+
+<!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
+    const images = wrapper.querySelectorAll('.carousel-img');
+    const prevBtn = wrapper.querySelector('.prev-btn');
+    const nextBtn = wrapper.querySelector('.next-btn');
+    let currentIndex = 0;
+
+    function showImage(index) {
+      images.forEach((img, i) => {
+        img.classList.toggle('active', i === index);
+      });
+    }
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    });
+
+    // Optional: Reset carousel when modal opens
+    const modal = wrapper.closest('.modal');
+    modal.addEventListener('transitionend', () => {
+      currentIndex = 0;
+      showImage(currentIndex);
+    });
+  });
+</script>
+
+
+</body>
+</html>
